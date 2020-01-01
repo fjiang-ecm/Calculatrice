@@ -6,6 +6,9 @@ function touche(str) {
         if (str == "*" || str == "/" || str == "+" || str == ")") {
             aff.textContent = "";
         }
+        else if (str == "-") {
+            aff.textContent = "(-";
+        }
         else {
             aff.textContent = str;
         }
@@ -13,6 +16,9 @@ function touche(str) {
     else if (val == "ERROR" || val == "NaN") {
         if (str == "*" || str == "/" || str == "+" || str == ")") {
             aff.textContent = "";
+        }
+        else if (str == "-") {
+            aff.textContent = "(-";
         }
         else {
             aff.textContent = str;
