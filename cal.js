@@ -3,22 +3,23 @@ var aff = document.getElementById("aff");
 function touche(str) {
     var val = aff.textContent;
     if (val == "") {
-        if (str == "*" || str == "/" || str == "+") {
-        }
-        else {
-            aff.textContent = str;
-        }
-    }
-    else if (val == "ERROR" || val == "NaN") {
-        if (str == "*" || str == "/" || str == "+") {
+        if (str == "*" || str == "/" || str == "+" || str == ")") {
             aff.textContent = "";
         }
         else {
             aff.textContent = str;
         }
     }
-    else if (val.substr(-1) == "*" || val.substr(-1) == "/" || val.substr(-1) == "+" || val.substr(-1) == "-") {
-        if (str == "*" || str == "/" || str == "+" || str == "-") {
+    else if (val == "ERROR" || val == "NaN") {
+        if (str == "*" || str == "/" || str == "+" || str == ")") {
+            aff.textContent = "";
+        }
+        else {
+            aff.textContent = str;
+        }
+    }
+    else if (val.substr(-1) == "*" || val.substr(-1) == "/" || val.substr(-1) == "+" || val.substr(-1) == "-" || val.substr(-1) == "(") {
+        if (str == "*" || str == "/" || str == "+" || str == "-" || str == ")") {
             aff.textContent = "ERROR";
         }
         else {
@@ -27,6 +28,9 @@ function touche(str) {
     }
     else if (val.substr(-1) == "." && str == ".") {
         aff.textContent = "ERROR";
+    }
+    else if (str == "(") {
+        aff.textContent = val + "*(";
     }
     else {
         aff.textContent = val + str;
@@ -53,7 +57,31 @@ function calculer() {
         }
         else {
             var car = str.substr(0, 1);
-            if (car == "*") {
+            if (car == "(") {
+                var i = 0;
+                var cpt = 1;
+                while (i < str.length && cpt > 0) {
+                    i++;
+                    if (str.substr(i, 1) == '(') {
+                        cpt++;
+                    }
+                    else if (str.substr(i, 1) == ')') {
+                        cpt--;
+                    }
+                }
+                if (cpt == 0) {
+                    return cal(cal("", str.substr(1, i - 1)), str.substr(i + 1));
+                }
+                else {
+                    alert("Mauvais parenthésage !!!");
+                    return "ERROR";
+                }
+            }
+            else if (car == ")") {
+                alert("Mauvais parenthésage !!!");
+                return "ERROR";
+            }
+            else if (car == "*") {
                 var aux1 = cal("", str.substr(1, str.length - 1));
                 if (aux1 == "") {
                     return "ERROR";
