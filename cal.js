@@ -124,7 +124,11 @@ function calculer() {
                     return "ERROR";
                 }
                 else if (aux == "") {
-                    return String(-Number(aux1));
+                    var i = 1;
+                    while (i < str.length && str.substr(i, 1) !== "/" && str.substr(i, 1) !== "*" && str.substr(i, 1) !== "+" && str.substr(i, 1) !== "-" && str.substr(i, 1) !== ".") {
+                        i++;
+                    }
+                    return cal(str.substr(0, i), str.substr(i));
                 }
                 else {
                     return String(Number(aux) - Number(aux1));
