@@ -5,8 +5,6 @@ function touche(str:string): void {
     if (val == "") {
         if (str == "*" || str == "/" || str == "+" || str == ")") {
             aff.textContent = "";
-        } else if (str == "-") {
-            aff.textContent = "(-";
         } else {
             aff.textContent = str;
         }
